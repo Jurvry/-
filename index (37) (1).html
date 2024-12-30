@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Innovator's Hub 🌟</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(45deg, #99ff99, #66ccff);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            transition: background 0.5s;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+            margin: 20px 0;
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        .promo-section, .creation-section {
+            display: none;
+        }
+        .active-section {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .emoji {
+            font-size: 2em;
+            margin: 0 5px;
+        }
+        .button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #33cc33;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: background 0.3s;
+            cursor: pointer;
+        }
+        .button:hover {
+            background: #009900;
+        }
+        .steps {
+            text-align: left;
+            margin: 20px 0;
+        }
+        .step {
+            margin: 15px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        .step::before {
+            content: '🔢';
+            position: absolute;
+            left: 0;
+            font-size: 1.5em;
+        }
+        
+        /* Hide the creation section initially */
+        .creation-section {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body onload="showSection('promo')">
+    <div class="container promo-section active-section">
+        <h1>Welcome to AI Innovator's Hub <span class="emoji">🌟</span></h1>
+        <h2>Empower Your Creativity <span class="emoji">🎨</span></h2>
+        <p>Revolutionize product design with the power of AI!</p>
+        
+        <div class="steps">
+            <h3>How It Works:</h3>
+            <div class="step">Dream Up Your Idea <span class="emoji">💡</span></div>
+            <div class="step">Refine with AI <span class="emoji">🤖</span></div>
+            <div class="step">Visualize Your Product <span class="emoji">🖼️</span></div>
+            <div class="step">Manufacture Your Innovation <span class="emoji">🏭</span></div>
+        </div>
+        
+        <button class="button" onclick="showSection('creation')">I'm Ready to Start <span class="emoji">🚀</span></button>
+    </div>
+
+    <div class="container creation-section">
+        <!-- All content from the previous product-creation section -->
+        <div class="lang-switch">
+            <button onclick="switchLanguage('en')">English</button>
+            <button onclick="switchLanguage('he')">עברית</button>
+        </div>
+        <h1 id="title">AI Innovator's Hub <span class="emoji">🌟</span></h1>
+        <h2 id="sub-title">Transform Your Ideas into Reality <span class="emoji">🚀</span></h2>
+        <p id="prompt-description" class="attention-grab">Enter your product idea or choose from our curated list:</p>
+        <input type="text" id="productIdea" placeholder="Your genius idea here...">
+        <select id="predefinedPrompts">
+            <option value="eco-friendly toy">Eco-friendly Toy <span class="emoji">🌍</span></option>
+            <option value="smart kitchen gadget">Smart Kitchen Gadget <span class="emoji">🍳</span></option>
+            <option value="innovative pet accessory">Innovative Pet Accessory <span class="emoji">🐶</span></option>
+            <option value="wearable tech">Wearable Tech <span class="emoji">⌚</span></option>
+        </select>
+        <button onclick="openAIWindow()">Enhance with AI <span class="emoji">🤖</span></button>
+        
+        <h2 id="manufacturing-title">Next Steps for Manufacturing <span class="emoji">🏭</span></h2>
+        <p id="manufacturing-description">Let's turn your concept into a tangible product:</p>
+        <ul>
+            <li><a href="3dprintingservice.com">3D Printing Magic <span class="emoji">🖨️</span></a></li>
+            <li><a href="manufacturingpartner.com">Custom Manufacturing Wonders <span class="emoji">🔧</span></a></li>
+        </ul>
+        <form action="/submit-design" method="post">
+            <textarea name="refinedConcept" id="refined-concept" cols="30" rows="10" placeholder="Paste your refined concept here..."></textarea><br>
+            <button type="submit">Request Manufacturing Quotes <span class="emoji">💡</span></button>
+        </form>
+        
+        <div class="monetize">
+            <p id="premium-description">Interested in premium features? <span class="emoji">💰</span></p>
+            <button onclick="alert('Unlock features like advanced AI design, direct manufacturer connections, and more!')">Explore Premium <span class="emoji">🔓</span></button>
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            // ... (Include your translation object here)
+        };
+
+        function showSection(section) {
+            document.querySelectorAll('.container').forEach(container => {
+                container.classList.remove('active-section');
+            });
+            document.querySelector(`.${section}-section`).classList.add('active-section');
+
+            if (section === 'creation') {
+                document.body.style.background = 'linear-gradient(45deg, #ffcc66, #ff6666)';
+            } else {
+                document.body.style.background = 'linear-gradient(45deg, #99ff99, #66ccff)';
+            }
+        }
+
+        function switchLanguage(lang) {
+            // ... (Include your language switch function here)
+        }
+
+        function openAIWindow() {
+            // ... (Include your AI window function here)
+        }
+
+        // Initial language set to English
+        switchLanguage('en');
+    </script>
+</body>
+</html>
